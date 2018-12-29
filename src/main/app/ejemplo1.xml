@@ -7,7 +7,7 @@
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd">
-    <http:listener-config name="HTTP_Listener_Configuration" host="0.0.0.0" port="9090" basePath="ejemplo" doc:name="HTTP Listener Configuration"/>
+    <http:listener-config name="HTTP_Listener_Configuration" host="0.0.0.0" port="9090" basePath="base" doc:name="HTTP Listener Configuration"/>
     
     <configuration doc:name="Configuration">
     	<expression-language autoResolveVariables="false" />
