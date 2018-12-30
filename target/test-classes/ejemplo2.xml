@@ -10,10 +10,15 @@ http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/jso
     <flow name="ejemplo2Flow">
         <http:listener config-ref="HTTP_Listener_Configuration" path="/ejemplo2" allowedMethods="POST" doc:name="HTTP"/>
         <logger message="#[message.payloadAs(java.lang.String)]" level="INFO" doc:name="Logger"/>
+        <set-variable variableName="variable1" value="#[json:empresa]" doc:name="Variable"/>
         <json:json-to-object-transformer returnClass="java.lang.Object" doc:name="JSON to Object"/>
-        <foreach collection="#[payload.IsVehiculo]" doc:name="For Each">
-            <logger level="INFO" doc:name="Logger"/>
+        <foreach collection="#[payload.IstVehiculo]" doc:name="For Each">
+            <flow-ref name="ejemplo2Flow1" doc:name="Flow Reference"/>
         </foreach>
-        <set-payload value="Exito" doc:name="Set Payload"/>
+        <set-payload value="#[[&quot;codigo&quot;:0,&quot;mensaje&quot;:&quot;Exito&quot;]]" doc:name="Set Payload"/>
+        <json:object-to-json-transformer doc:name="Object to JSON"/>
+    </flow>
+    <flow name="ejemplo2Flow1">
+        <logger message="#[payload.modelo] + &quot;Empresa: &quot; + #[flowVars.variable1]" level="INFO" doc:name="Logger"/>
     </flow>
 </mule>
