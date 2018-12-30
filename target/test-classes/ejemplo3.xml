@@ -15,11 +15,11 @@ http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/jso
     
     <flow name="ejemplo3Flow">
         <http:listener config-ref="HTTP_Listener_Configuration" path="/ejemplo3" allowedMethods="POST" doc:name="HTTP"/>
-        <logger message="Estadi = #[json.estado]" level="INFO" doc:name="Logger"/>
+        <logger message="Estado = #[json:estado]" level="INFO" doc:name="Logger"/>
         <choice doc:name="Choice">
-            <when expression="#[json:esatdo=1]">
+            <when expression="#[json:estado=1]">
                 <splitter expression="#[json:IstVehiculo]" doc:name="Splitter"/>
-                <logger level="INFO" doc:name="Logger"/>
+                <logger level="INFO" doc:name="Logger" message="Modelo: #[json:modelo], Anio: #[json:anio]"/>
                 <invoke object-ref="util" method="demo" methodArguments="#[json:modelo], #[json:anio]" methodArgumentTypes="java.lang.String,java.lang.Integer" doc:name="Invoke"/>
                 <collection-aggregator failOnTimeout="true" doc:name="Collection Aggregator"/>
             </when>
